@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PBank | Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    {# *** Allow sub-templates to insert extra html to the head section *** #}
+    {% block extra_css %}{% endblock %}
+  </head>
+
+
+<body style="min-height: 100vh; background: url('../../static/images/auth_bg.jpg'); background-size: cover; background-position: center;" class="p-4">
+  {% block body %}
+  
+  {% block menu %}
+  
+  {% endblock %}
+
+  <div id="main-div" class="with-margins">
+  {# One-time system messages called Flash messages #}
+  {% block flash_messages %}
+      {%- with messages = get_flashed_messages(with_categories=true) -%}
+          {% if messages %}
+              {% for category, message in messages %}
+                  {% if category=='error' %}
+                      {% set category='danger' %}
+                  {% endif %}
+                  <div class="alert alert-{{category}}">{{ message|safe }}</div>
+              {% endfor %}
+          {% endif %}
+      {%- endwith %}
+  {% endblock %}
+
+  {% block main %}
+      {% block content %}{% endblock %}
+  {% endblock %}
+  </div>
+  
+  {% endblock %}
+
+
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/mdb.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  {# *** Allow sub-templates to insert extra html to the bottom of the body *** #}
+  {% block extra_js %}{% endblock %}
+
+  </body>
+</html>

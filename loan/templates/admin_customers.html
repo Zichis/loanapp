@@ -1,0 +1,49 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<div style="padding: 3%;">
+  <div class="mt-3">
+    <div class="card">
+      <div class="p-3" style="border-bottom: 1px solid rgb(233, 220, 220)">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <span style="font-size: 20px; font-weight: bold;">Customers</span>
+            </div>
+            <div class="col-md-4" style="text-align: right;">
+              <a href="{{ url_for('admin_customer_add') }}" class="btn btn-sm btn-default"><span class="fa fa-user-plus"></span> Add customer</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead class="grey lighten-2">
+              <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for customer in customers %}
+                <tr>
+                  <td>{{ customer.firstname }}</td>
+                  <td>{{ customer.lastname }}</td>
+                  <td>{{ customer.nationality }}</td>
+                  <td>
+                    <a href="{{ url_for('admin_customer_id', user_id = customer.user_id) }}" class="btn btn-amber btn-sm"><span class="fa fa-paper-plane-o"></span> View</a>&nbsp;
+                    <a href="{{ url_for('admin_remove_user_confirmation', user_id = customer.user_id) }}" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

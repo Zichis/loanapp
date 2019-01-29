@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PBank | Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/mdb.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body style="background: grey;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-4 offset-md-4">
+        <div class="card" style="margin-top: 20vh;">
+          <h5 class="card-header"><span class="fa fa-warning"></span> Action warning</h5>
+          <div class="card-body">
+            Are you sure you want to remove {{ user_profile.firstname }} {{ user_profile.lastname }}'s records?
+          </div>
+          <div class="container">
+            <div class="row pb-3">
+              <div class="col-sm-6 mb-1"><a href="{{ url_for('admin_dashboard') }}" class="btn btn-amber btn-sm btn-block">Go back</a></div>
+              <div class="col-sm-6 mb-1">
+                <form method="POST" action="{{ url_for('admin_remove_user', user_id = user_profile.id) }}">
+                  <button type="submit" class="btn btn-danger btn-sm btn-block">Confirm</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/mdb.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

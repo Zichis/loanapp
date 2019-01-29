@@ -1,0 +1,77 @@
+{% extends 'customer_layout.html' %} {% block content %}
+<div class="container">
+  <div class="row m-4" style="margin-top: 10vh;">
+    <div class="col-md-6">
+      <div class="customer-card green-gradient p-4">
+        <div class="card-image text-center">
+          <img
+            class="card-avatar"
+            src="{{ url_for('static', filename='images/default.png') }}"
+            alt=""
+          />
+        </div>
+        <div class="card-text text-center p-1 white-text">
+          <h5>
+            {{ profile.firstname }} {{ profile.middlename }}
+            {{ profile.lastname }}
+          </h5>
+          <a href="#" class="btn btn-outline-light btn-sm">View profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="customer-card red-gradient p-4">
+        <div class="card-image text-center">
+          <img
+            class="card-avatar"
+            src="{{ url_for('static', filename='images/balance.jpg') }}"
+            alt=""
+          />
+        </div>
+        <div class="card-text text-center p-1 white-text">
+          {% for account in accounts %}
+          <h5>{{ account.number }}</h5>
+          {% endfor %}
+          <a href="#" class="btn btn-outline-light btn-sm">View accounts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col-md-6">
+      <div class="customer-card blue-gradient p-4">
+        <div class="card-image text-center">
+          <img
+            class="card-avatar"
+            src="{{ url_for('static', filename='images/loan.jpg') }}"
+            alt=""
+          />
+        </div>
+        <div class="card-text text-center p-1 white-text">
+          <h5>GHS 0.00</h5>
+          <a
+            href="{{ url_for('customer_loan_request') }}"
+            class="btn btn-outline-light btn-sm"
+            >Loan application</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="customer-card yellow-gradient p-4">
+        <div class="card-image text-center">
+          <img
+            class="card-avatar"
+            src="{{ url_for('static', filename='images/cogwheel.jpg') }}"
+            alt=""
+          />
+        </div>
+        <div class="card-text text-center p-1 white-text">
+          <h5>Default</h5>
+          <a href="#" class="btn btn-outline-light btn-sm">View Settings</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

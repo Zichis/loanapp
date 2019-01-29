@@ -1,0 +1,94 @@
+{% extends 'customer_layout.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mb-3">
+      <div class="default-card" style="background: rgb(248, 242, 242);">
+        <form
+          class="border border-light p-4"
+          style="border-radius: 10px;"
+          action=""
+          method="POST"
+        >
+          {{ form.hidden_tag() }}
+          <h3 style="text-align: center;">Verify loan status</h3>
+          <div class="form-row mb-4">
+            <div class="col">
+              {{ form.annual_income.label }}
+              {{ form.annual_income(class="form-control form-control-sm", placeholder="Annual income") }}
+            </div>
+            <div class="col">
+              {{ form.loan_amount.label }}
+              {{ form.loan_amount(class="form-control form-control-sm", placeholder="Loan amount") }}
+            </div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="col">
+              {{ form.purpose_of_loan.label }}
+              {{ form.purpose_of_loan(class="form-control form-control-sm", placeholder="Purose of loan") }}
+            </div>
+            <div class="col">
+              {{ form.home_ownership.label }}
+              {{ form.home_ownership(class="form-control form-control-sm", placeholder="Home ownership") }}
+            </div>
+            <div class="col">
+              {{ form.term.label }}
+              {{ form.term(class="form-control form-control-sm", placeholder="Term") }}
+            </div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="col">
+              {{ form.emp_length_num.label }}
+              {{ form.emp_length_num(class="form-control form-control-sm", placeholder="Length of employment") }}
+            </div>
+            <div class="col">
+              {{ form.short_emp.label }}
+              {{ form.short_emp(class="form-control form-control-sm", placeholder="Time of employment") }}
+            </div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="col">
+              {{ form.dti.label }}
+              {{ form.dti(class="form-control form-control-sm", placeholder="Debt To Income Ratio (DTI)") }}
+            </div>
+            <div class="col">
+              {{ form.revol_util.label }}
+              {{ form.revol_util(class="form-control form-control-sm", placeholder="Percentage of available credit") }}
+            </div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="col">
+              {{ form.last_delinq_none.label }}
+              {{ form.last_delinq_none(class="form-control form-control-sm", placeholder="Borrower deliquency") }}
+            </div>
+            <div class="col">
+              {{ form.total_rec_late_fee.label }}
+              {{ form.total_rec_late_fee(class="form-control form-control-sm", placeholder="Total late fees received") }}
+            </div>
+          </div>
+          <button class="btn btn-block btn-blue-grey">Verify</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div
+        class="customer-card blue-gradient white-text text-center mb-3"
+        style="padding: 25%;"
+      >
+        <h5>Outstanding loan</h5>
+        {% for account in accounts %}
+          <h2>GHC {{ account.outstanding }}</h2>
+        {% endfor %}
+      </div>
+      <div
+        class="customer-card green-gradient white-text text-center mb-3"
+        style="padding: 25%;"
+      >
+        <h5>Account balance</h5>
+        {% for account in accounts %}
+          <h2>GHC {{ account.balance }}</h2>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

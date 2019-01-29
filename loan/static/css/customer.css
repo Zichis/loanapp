@@ -1,0 +1,29 @@
+.customer-card{
+  border-radius: 10px;
+  height: 230px;
+  box-shadow: 0 12px 12px -6px grey;
+}
+
+.green-gradient{
+  background: rgb(51, 182, 127);
+  background: linear-gradient(rgb(51, 182, 127), rgb(38, 134, 94));
+}
+
+.red-gradient{
+  background: linear-gradient(rgb(240, 77, 77), rgb(128, 43, 43));
+}
+
+.blue-gradient{
+  background: linear-gradient(rgb(95, 123, 218), rgb(38, 76, 134))
+}
+
+.yellow-gradient{
+  background: linear-gradient(rgb(230, 248, 66), rgb(127, 134, 38))
+}
+
+.card-avatar{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+}

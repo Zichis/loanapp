@@ -1,0 +1,9 @@
+{% extends 'customer_layout.html' %} {% block content %}
+<div class="container">
+  <div class="customer-card p-3" style="background: white;">
+    <h3>Loan request denial</h3>
+    <hr />
+    <p>{{ profile.firstname }}, sorry you're not eligible to collect loan</p>
+  </div>
+</div>
+{% endblock content %}

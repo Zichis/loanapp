@@ -1,0 +1,47 @@
+{% extends 'admin_layout.html' %}
+
+{% block content %}
+  <div style="padding: 3%;">
+    <div class="mt-3">
+        <div class="card">
+          <div class="p-3" style="border-bottom: 1px solid rgb(233, 220, 220)">
+            <span style="font-size: 20px; font-weight: bold;">Staff</span>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive text-nowrap">
+              <table class="table">
+                <thead class="grey lighten-2">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock content %}

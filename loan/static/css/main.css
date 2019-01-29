@@ -1,0 +1,32 @@
+.btn-rounded{
+  border-radius: 20px;
+}
+
+legend{
+  text-align: left;
+}
+
+.default-card{
+  box-shadow: 0 12px 12px -6px grey;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sideMenuList{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sideMenuList li{
+  padding: 10px 0;
+}
+
+.sideMenuList li a{
+  color: rgb(236, 234, 234);
+  letter-spacing: 1px;
+}
+
+.sideMenuList li a:hover{
+  color: rgb(139, 136, 136);
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Loan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdbootstrap/css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark unique-color-dark">
+    <a href="#" style="color: orange;" class="navbar-brand"><strong><span class="fa fa-building-o"></span> PBank</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuContent" aria-controls="menuContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/" class="nav-link"><span class="fa fa-home"></span>&nbsp;Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span>&nbsp;
+                    {% if current_user.is_authenticated %}
+                        {{ profile.firstname }}
+                    {% else %}
+                        <span>User</span>
+                    {% endif %}
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    {% if current_user.is_authenticated %}
+                        <a class="dropdown-item" href="/{{ userRole }}/dashboard"><span class="fa fa-th"></span>&nbsp;Dashboard</a>
+                        <a class="dropdown-item" href="/user/sign-out"><span class="fa fa-sign-out"></span>&nbsp;Sign out</a>
+                    {% else %}
+                        <a class="dropdown-item" href="/user/sign-in"><span class="fa fa-sign-in"></span>&nbsp;Sign in</a>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="/contact-us" class="nav-link"><span class="fa fa-envelope"></span>&nbsp;Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="/about-us" class="nav-link"><span class="fa fa-info-circle"></span>&nbsp;About</a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+  <div class="container pt-2 col-sm-12" style="position: fixed; z-index: 5;">
+    {% with messages = get_flashed_messages(with_categories = true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+  <!--Carousel Wrapper-->
+  <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-2" data-slide-to="1"></li>
+      <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active">
+        <div class="view">
+          <img class="d-block w-100" src="{{url_for('static', filename='images/home_carousel/slide_1.jpg')}}" alt="First slide">
+          <div class="mask rgba-black-strong"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Conducive environment</h3>
+          <p>Bank with us in a perfect environment</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view">
+          <img class="d-block w-100" src="{{url_for('static', filename='images/home_carousel/slide_2.jpg')}}" alt="Second slide">
+          <div class="mask rgba-black-strong"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Savings</h3>
+          <p>Every penny matters</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view">
+          <img class="d-block w-100" src="{{url_for('static', filename='images/home_carousel/slide_3.jpg')}}" alt="Third slide">
+          <div class="mask rgba-black-strong"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Loans</h3>
+          <p>Our affordable loans got you covered</p>
+        </div>
+      </div>
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+        <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+        <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+  </div>
+  <!--/.Carousel Wrapper-->
+
+  <!-- Section: Features v.1 -->
+  <section class="text-center my-5">
+    <div class="container">
+      <!-- Section heading -->
+      <h2 class="h1-responsive font-weight-bold my-5">Why are we the best?</h2>
+      <!-- Section description -->
+      <p class="lead blue-grey-text w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+      <!-- Grid row -->
+      <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4  mb-3">
+        <i class="fa fa-area-chart fa-3x red-text"></i>
+        <h5 class="font-weight-bold my-4">Analytics</h5>
+        <p class="blue-grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+            maiores aperiam minima assumenda deleniti hic.
+        </p>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4  mb-3">
+        <i class="fa fa-book fa-3x cyan-text"></i>
+        <h5 class="font-weight-bold my-4">Tutorials</h5>
+        <p class="blue-grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+            maiores aperiam minima assumenda deleniti hic.
+        </p>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 mb-3">
+        <i class="fa fa-comments-o fa-3x orange-text"></i>
+        <h5 class="font-weight-bold my-4">Support</h5>
+        <p class="blue-grey-text mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+            aperiam minima assumenda deleniti hic.
+        </p>
+      </div>
+      <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Features v.1 -->
+  
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='mdbootstrap/js/mdb.min.js') }}"></script>
+</body>
+</html>

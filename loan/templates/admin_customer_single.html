@@ -1,0 +1,48 @@
+{% extends 'admin_layout.html' %}
+
+{% block content %}
+  <div style="padding: 3%;">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h4><span class="fa fa-user"></span> Profile</h4>
+            <hr />
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="dark-grey-text">First name</h6>
+                <h5>{{ customer_profile.firstname }}</h5>
+                <h6 class="dark-grey-text">Last name</h6>
+                <h5>{{ customer_profile.lastname }}</h5>
+                <h6 class="dark-grey-text">Gender</h6>
+                <h5>{{ customer_profile.gender }}</h5>
+              </div>
+              <div class="col-md-6">
+                <h6 class="dark-grey-text">Middle name</h6>
+                <h5>{{ customer_profile.middlename }}</h5>
+                <h6 class="dark-grey-text">Nationality</h6>
+                <h5>{{ customer_profile.nationality }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h4><span class="fa fa-money"></span> Accounts</h4>
+            <hr />
+            {% for account in accounts %}
+            <h6 class="dark-grey-text">Account number</h6>
+            <h5>{{ account.number }}</h5>
+            <h6 class="dark-grey-text">Account balance</h6>
+            <h5>GHC {{ account.balance }}</h5>
+            <h6 class="dark-grey-text">Outstanding</h6>
+            <h5>GHC {{ account.outstanding }}</h5>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
