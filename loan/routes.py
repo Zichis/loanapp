@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for
 from loan.models import User, Profile, Account, Role, LoanProfile
 from flask_user import login_required, UserManager, roles_required, current_user
 from flask_user.db_manager import DBManager
-from loan.forms import AddCustomerForm, LoanStatusForm
+from loan.forms import AddUserForm, AddAdminForm, LoanStatusForm
 from loan.randomforest import RandomForestAlgorithm
 
 user_manager = UserManager(app, db, User)
@@ -83,13 +83,14 @@ def admin_customer_id(user_id):
   profile = Profile.query.filter_by(user_id = current_user.id).all()
   customer_profile = Profile.query.filter_by(user_id = user_id).all()
   accounts = Account.query.filter_by(user_id = user_id).all()
-  return render_template('admin_customer_single.html', profile=profile[0], customer_profile=customer_profile[0], accounts=accounts)
+  loan_profiles = LoanProfile.query.filter_by(user_id = user_id).all()
+  return render_template('admin_customer_single.html', profile=profile[0], customer_profile=customer_profile[0], accounts=accounts, loan_profiles=loan_profiles)
 
 @app.route('/admin/customer_add', methods=['POST', 'GET'])
 @roles_required('Admin')
 def admin_customer_add():
-  form = AddCustomerForm()
-  profile = Profile.query.filter_by(id = 1).all()
+  form = AddUserForm()
+  profile = Profile.query.filter_by(user_id = current_user.id).all()
 
   if form.validate_on_submit():
 
@@ -126,23 +127,51 @@ def admin_customer_add():
     return redirect(url_for('admin_customers'))
   return render_template('admin_customer_add.html', profile=profile[0], form=form)
 
-@app.route('/admin/staff')
-@roles_required('Admin')
-def admin_staff():
-  profile = Profile.query.filter_by(id = current_user.id).all()
-  staff = getAllStaff('all')
-  return render_template('admin_staff.html', profile=profile[0], staff=staff)
-
 @app.route('/admin/admins')
 @roles_required('Admin')
 def admin_admins():
   profile = Profile.query.filter_by(id = 1).all()
-  return render_template('admin_admins.html', profile=profile[0])
+  admins = getAllAdmins('all')
+  return render_template('admin_admins.html', profile=profile[0], admins=admins)
 
 @app.route('/admin/admin_user/<user_id>')
 @roles_required('Admin')
 def admin_admin_user_id(user_id):
-  return "<h4>Yes, it works</h4>ID : " + user_id
+  profile = Profile.query.filter_by(user_id = current_user.id).all()
+  admin_profile = Profile.query.filter_by(user_id = user_id).all()
+  return render_template('admin_admin_single.html', profile=profile[0], admin_profile=admin_profile[0])
+
+@app.route('/admin/admin_add', methods=['POST', 'GET'])
+@roles_required('Admin')
+def admin_admin_add():
+  form = AddAdminForm()
+  profile = Profile.query.filter_by(user_id = current_user.id).all()
+
+  if form.validate_on_submit():
+    new_user = User(username = form.username.data, email = form.email.data, password = user_manager.hash_password(form.password.data))
+    db.session.add(new_user)
+    db.session.commit()
+
+    db_manager.add_user_role(new_user, 'Admin')
+    db_manager.commit()
+
+    new_profile = Profile(
+      firstname = form.firstname.data,
+      middlename = form.middlename.data,
+      lastname = form.lastname.data,
+      gender = form.gender.data,
+      nationality = form.nationality.data,
+      user_id = new_user.id
+    )
+
+    db.session.add(new_profile)
+    db.session.commit()
+
+    flash('New admin added', 'success')
+
+    return redirect(url_for('admin_admins'))
+  
+  return render_template('admin_admin_add.html', form=form, profile=profile[0])
 
 @app.route('/admin/remove_user_confirmation/<user_id>', methods=['POST', 'GET'])
 @roles_required('Admin')
@@ -153,17 +182,29 @@ def admin_remove_user_confirmation(user_id):
 @app.route('/admin/remove_user/<user_id>', methods=['POST', 'GET'])
 @roles_required('Admin')
 def admin_remove_user(user_id):
-  user = Account.query.filter_by(user_id = user_id).all()
-  db.session.delete(user[0])
-  db.session.commit()
-
-  user = Profile.query.filter_by(user_id = user_id).all()
-  db.session.delete(user[0])
-  db.session.commit()
-
   user = User.query.filter_by(id = user_id).all()
-  db.session.delete(user[0])
-  db.session.commit()
+  role = user[0].roles[0].name
+
+  if role == 'Customer':
+    user = Account.query.filter_by(user_id = user_id).all()
+    db.session.delete(user[0])
+    db.session.commit()
+
+    user = Profile.query.filter_by(user_id = user_id).all()
+    db.session.delete(user[0])
+    db.session.commit()
+
+    user = User.query.filter_by(id = user_id).all()
+    db.session.delete(user[0])
+    db.session.commit()
+  elif role == 'Admin':
+    user = Profile.query.filter_by(user_id = user_id).all()
+    db.session.delete(user[0])
+    db.session.commit()
+
+    user = User.query.filter_by(id = user_id).all()
+    db.session.delete(user[0])
+    db.session.commit()
 
   flash("User's record has been removed!", "success")
   return redirect(url_for('admin_dashboard'))

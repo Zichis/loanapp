@@ -2,7 +2,18 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired, Email, EqualTo
 
-class AddCustomerForm(FlaskForm):
+class AddAdminForm(FlaskForm):
+  firstname = StringField('First name', validators=[DataRequired()])
+  middlename = StringField('Middle name', validators=[DataRequired()])
+  lastname = StringField('Last name', validators=[DataRequired()])
+  gender = SelectField('Gender', choices=[('Male', 'Male'), ('Female', 'Female')])
+  nationality = SelectField('Nationality', choices=[('Nigerian', 'Nigerian'), ('Ghanaian', 'Ghanaian')])
+  username = StringField('Username', validators=[DataRequired()])
+  email = StringField('Email', validators=[DataRequired(), Email()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password')])
+
+class AddUserForm(FlaskForm):
   firstname = StringField('First name', validators=[DataRequired()])
   middlename = StringField('Middle name', validators=[DataRequired()])
   lastname = StringField('Last name', validators=[DataRequired()])

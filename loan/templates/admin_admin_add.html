@@ -1,0 +1,65 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+  <div style="padding: 3%;">
+    <div class="mt-2">
+      <div class="card" style="border-radius: 0;">
+        <div class="card-body">
+          <form class="text-center border border-light p-5" method="POST">
+            <h4>Add Admin</h4>
+            <fieldset><legend>Profile</legend>
+              <div class="form-row mb-4">
+                {{ form.hidden_tag() }}
+                <div class="col">
+                    <!-- First name -->
+                    {{ form.firstname(class="form-control form-control-sm", placeholder="First name") }}
+                </div>
+                <div class="col">
+                    <!-- Middle name -->
+                    {{ form.middlename(class="form-control form-control-sm", placeholder="Middle name") }}
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    {{ form.lastname(class="form-control form-control-sm", placeholder="Last name") }}
+                </div>
+              </div>
+              <div class="form-row mb-4">
+                <div class="col">
+                    <!-- First name -->
+                    {{ form.gender(class="form-control form-control-sm") }}
+                </div>
+                <div class="col">
+                    <!-- Middle name -->
+                    {{ form.nationality(class="form-control form-control-sm") }}
+                </div>
+              </div>
+            </fieldset>
+            <fieldset><legend>Authentication</legend>
+              <div class="form-row mb-4">
+                <div class="col">
+                  <!-- Username -->
+                  {{ form.username(class="form-control form-control-sm", placeholder="Username") }}
+                </div>
+                <div class="col">
+                  <!-- Email -->
+                  {{ form.email(class="form-control form-control-sm", placeholder="Email") }}
+                </div>
+              </div>
+              <div class="form-row mb-4">
+                <div class="col">
+                  <!-- Password -->
+                  {{ form.password(class="form-control form-control-sm", placeholder="Password") }}
+                </div>
+                <div class="col">
+                  <!-- Confirm password -->
+                  {{ form.confirm_password(class="form-control form-control-sm", placeholder="Confirm password") }}
+                </div>
+              </div>
+            </fieldset>
+            <button class="btn btn-block btn-primary" type="submit"><span class="fa fa-user-plus"></span> Add new admin</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
