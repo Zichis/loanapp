@@ -1,0 +1,96 @@
+{% extends 'customer_layout.html' %} 
+{% block content %}
+<div style="padding: 3%;">
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h4><span class="fa fa-user"></span> Profile</h4>
+          <hr />
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="dark-grey-text">First name</h6>
+              <h5>{{ profile.firstname }}</h5>
+              <h6 class="dark-grey-text">Last name</h6>
+              <h5>{{ profile.lastname }}</h5>
+              <h6 class="dark-grey-text">Gender</h6>
+              <h5>{{ profile.gender }}</h5>
+            </div>
+            <div class="col-md-6">
+              <h6 class="dark-grey-text">Middle name</h6>
+              <h5>{{ profile.middlename }}</h5>
+              <h6 class="dark-grey-text">Nationality</h6>
+              <h5>{{ profile.nationality }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h4><span class="fa fa-money"></span> Accounts</h4>
+          <hr />
+          {% for account in accounts %}
+          <h6 class="dark-grey-text">Account number</h6>
+          <h5>{{ account.number }}</h5>
+          <h6 class="dark-grey-text">Account balance</h6>
+          <h5>GHC {{ account.balance }}</h5>
+          <h6 class="dark-grey-text">Outstanding</h6>
+          <h5>GHC {{ account.outstanding }}</h5>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h4><span class="fa fa-info-circle"></span> Loan Information</h4>
+          <hr />
+          <div class="table-responsive text-nowrap">
+              <table class="table">
+                <thead class="grey lighten-2">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Annual Income</th>
+                    <th scope="col">Loan Amount</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Home Ownership</th>
+                    <th scope="col">Term</th>
+                    <th scope="col">Time of Employment</th>
+                    <th scope="col">Borrower Deliquency</th>
+                    <th scope="col">DTI</th>
+                    <th scope="col">Length of Employment</th>
+                    <th scope="col">% Available Credit</th>
+                    <th scope="col">Total Late Fees</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for loan_profile in loan_profiles %}
+                    <tr>
+                      <td>{{ loan_profile.id }}</td>
+                      <td>{{ loan_profile.annual_income }}</td>
+                      <td>{{ loan_profile.loan_amount }}</td>
+                      <td>{{ loan_profile.purpose_of_loan }}</td>
+                      <td>{{ loan_profile.home_ownership }}</td>
+                      <td>{{ loan_profile.term }}</td>
+                      <td>{{ loan_profile.time_of_employment }}</td>
+                      <td>{{ loan_profile.borrower_deliquency }}</td>
+                      <td>{{ loan_profile.dti }}</td>
+                      <td>{{ loan_profile.length_of_employment }}</td>
+                      <td>{{ loan_profile.percentage_available_credit }}</td>
+                      <td>{{ loan_profile.total_late_fees }}</td>
+                      <td></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

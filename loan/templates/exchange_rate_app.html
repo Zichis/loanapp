@@ -1,0 +1,62 @@
+{% extends 'customer_layout.html' %} 
+{% block content %}
+<div style="padding: 3%;">
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <div class="card p-4" style="background: linear-gradient(#f2c94c, #f2994a); color: white;">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h2>Exchange rate</h2>
+          </div>
+          <div class="col-sm-6">
+            <h5>From</h5>
+            <div class="form-group">
+              <label for="fromCurrency">Currency</label>
+              <select class="form-control form-control-sm" id="fromCurrency">
+                <option value="GHS">GHS Ghanaian Cedi</option>
+                <option value="NGN">NGN Nigerian Naira</option>
+                <option value="USD">USD American Dollar</option>
+                <option value="GBP">GBP Pound Sterling</option>
+                <option value="CNY">Chinese Yuan Renminbi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="text" class="form-control form-control-sm" id="fromAmount" placeholder="0.00">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h5>To</h5>
+            <div class="form-group">
+              <label for="toCurrency">Currency</label>
+              <select class="form-control form-control-sm" id="toCurrency">
+                <option value="GHS">GHS Ghanaian Cedi</option>
+                <option value="NGN">NGN Nigerian Naira</option>
+                <option value="USD">USD American Dollar</option>
+                <option value="GBP">GBP Pound Sterling</option>
+                <option value="CNY">Chinese Yuan Renminbi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="toAmount">Amount</label><br>
+              <!--<input type="text" class="form-control-plaintext form-control-sm" id="toAmount" placeholder="0.00" readonly>-->
+              <span id="toAmount">0.00</span>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div class="btn btn-block btn-dark btn-sm" id="calculateExRateBtn">Calculate</div>
+            </div>
+          </div>
+          <div class="col-sm-12 text-center">
+            <small id="emailHelp" class="form-text text-muted" style="color: white !important;">
+              Realtime exchange rate powered by
+              <a href="https://www.alphavantage.co" target="_blank" rel="noopener noreferrer" style="color: rgb(223, 204, 191) !important;">Alphavantage</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

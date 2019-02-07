@@ -5,6 +5,7 @@ from flask_user import login_required, UserManager, roles_required, current_user
 from flask_user.db_manager import DBManager
 from loan.forms import AddUserForm, AddAdminForm, LoanStatusForm
 from loan.randomforest import RandomForestAlgorithm
+from loan.functions import modify_home_ownership, modify_purpose, modify_term, modify_time_of_employment
 
 user_manager = UserManager(app, db, User)
 db_manager = DBManager(app, db, User, UserEmailClass=None, UserInvitationClass=None, RoleClass=Role)
@@ -47,6 +48,27 @@ def home():
     userRole = 'Error'
   return render_template('index.html', profile=profile[0], userRole=userRole)
 
+@app.route('/contact')
+def contact():
+  if current_user.is_authenticated:
+    profile = Profile.query.filter_by(id = current_user.id).all()
+    user = User.query.filter_by(id = current_user.id).all()
+    userRole = user[0].roles[0].name.lower()
+  else:
+    profile = ['Error']
+    userRole = 'Error'
+  return render_template('contact.html', profile=profile[0], userRole=userRole)
+
+@app.route('/about')
+def about():
+  if current_user.is_authenticated:
+    profile = Profile.query.filter_by(id = current_user.id).all()
+    user = User.query.filter_by(id = current_user.id).all()
+    userRole = user[0].roles[0].name.lower()
+  else:
+    profile = ['Error']
+    userRole = 'Error'
+  return render_template('about.html', profile=profile[0], userRole=userRole)
 
 @app.route('/admin/dashboard')
 @roles_required('Admin')
@@ -218,6 +240,14 @@ def customer_dashboard():
   accounts = Account.query.filter_by(user_id = current_user.id).all()
   return render_template('customer_dashboard.html', profile=profile[0], accounts=accounts)
 
+@app.route('/customer/profile')
+@roles_required('Customer')
+def customer_profile():
+  profile = Profile.query.filter_by(user_id = current_user.id).all()
+  accounts = Account.query.filter_by(user_id = current_user.id).all()
+  loan_profiles = LoanProfile.query.filter_by(user_id = current_user.id).all()
+  return render_template('customer_profile.html', profile=profile[0], accounts=accounts, loan_profiles=loan_profiles)
+
 @app.route('/customer/loan_request', methods=['GET', 'POST'])
 @roles_required('Customer')
 def customer_loan_request():
@@ -283,6 +313,11 @@ def customer_loan_confirmation():
 def customer_loan_denial():
   profile = Profile.query.filter_by(id = current_user.id).all()
   return render_template('customer_loan_denial.html', profile=profile[0])
+
+@app.route('/customer/exchange_rate_app')
+def exchange_rate_app():
+  profile = Profile.query.filter_by(id = current_user.id).all()
+  return render_template('exchange_rate_app.html', profile=profile[0])
 
 @app.errorhandler(404)
 def page_not_found(e):

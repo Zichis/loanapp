@@ -25,7 +25,9 @@
           <ul class="sideMenuList">
             <li><a href="{{ url_for('home') }}"><span class="fa fa-home"></span>&nbsp;&nbsp;Home</a></li>
             <li><a href="{{ url_for('customer_dashboard') }}"><span class="fa fa-th"></span>&nbsp;&nbsp;Dashboard</a></li>
-            <li><a href=""><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a></li>
+            <li><a href="{{ url_for('customer_profile') }}"><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;Profile</a></li>
+            <li><a href="{{ url_for('customer_loan_request') }}"><span class="fa fa-desktop"></span>&nbsp;&nbsp;Loan application</a></li>
+            <li><a href="{{ url_for('exchange_rate_app') }}"><span class="fa fa-refresh"></span>&nbsp;&nbsp;Exchange application</a></li>
             <li><a href="{{ url_for('user.logout') }}"><span class="fa fa-sign-out"></span>&nbsp;&nbsp;Sign out</a></li>
           </ul>
         </div>
@@ -224,5 +226,6 @@
   <script src="{{ url_for('static', filename='mdbootstrap/js/mdb.min.js') }}"></script>
   <script src="{{ url_for('static', filename='mdbootstrap/js/popper.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/exchange_rate.js') }}"></script>
 </body>
 </html>
