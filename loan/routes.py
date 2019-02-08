@@ -270,7 +270,7 @@ def customer_loan_request():
     percentage_available_credit = form.revol_util.data
     borrower_deliquency = form.last_delinq_none.data
     total_late_fees = form.total_rec_late_fee.data
-    loan_amount = form.loan_amount
+    loan_amount = form.loan_amount.data
 
     randomForestAlgorithm = RandomForestAlgorithm(
       annual_income, purpose, home_ownership, term, length_of_employment, time_of_employment, dti, 
